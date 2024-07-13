@@ -277,7 +277,7 @@ class SwidgetDevice:
     @property
     def is_outlet(self) -> bool:
         """Return True if the device is an outlet."""
-        return self.device_type == "outlet"
+        return self.device_type == "outlet" or self.device_type == "outlet_20a"
 
     @property
     def is_switch(self) -> bool:
@@ -302,10 +302,6 @@ class SwidgetDevice:
         if self._last_update is None:
             return f"<{self.device_type} at {self.ip_address} - update() needed>"
         return f"<{self.device_type} model {self.model} at {self.ip_address}>"
-
-    def __del__(self):
-        if self.use_websockets:
-            self.stop()
 
 class SwidgetAssembly:
     def __init__(self, summary: dict):
